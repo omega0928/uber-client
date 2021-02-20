@@ -5,10 +5,10 @@ import { ThemeProvider } from "../../typed-components";
 import AppPresenter from "./AppPresenter";
 
 function AppContainer() {
-  const isLoggedIn = isLoggedInVar;
+  const isLoggedIn = isLoggedInVar();
   return (
     <ThemeProvider theme={theme}>
-      <AppPresenter />
+      <AppPresenter isLoggedIn={isLoggedIn}/>
     </ThemeProvider>
   );
 }

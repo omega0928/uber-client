@@ -49,17 +49,17 @@ const PhoneLogin = styled.div`
 `;
 
 const Grey = styled.span`
-  color: ${(props) => props.theme.greyColor};
+  color: ${(props: { theme: { greyColor: any; }; }) => props.theme.greyColor};
   margin-left: 10px;
 `;
 
 const SocialLogin = styled.div`
-  border-top: 1px solid ${(props) => props.theme.greyColor};
+  border-top: 1px solid ${(props: { theme: { greyColor: any; }; }) => props.theme.greyColor};
   padding: 30px 20px;
 `;
 
 const SocialLink = styled.span`
-  color: ${(props) => props.theme.blueColor};
+  color: ${(props: { theme: { blueColor: any; }; }) => props.theme.blueColor};
   font-size: 20px;
 `;
 

@@ -62,50 +62,51 @@ const Button = styled.button`
 
 function PhoneLogin() {
   const history = useHistory();
-  const [InputState, setInputState] = useState({
+  const [inputState, setInputState] = useState({
     countryCode: "+82",
     phoneNumber: "12345",
   });
+  const { countryCode, phoneNumber } = inputState;
   const [phoneSignIn, { loading }] = useMutation<
     startPhoneVerification,
     startPhoneVerificationVariables
   >(PHONE_SIGN_IN, {
     onCompleted: (data) => {
       const { StartPhoneVerification } = data;
+      const phone = `${countryCode}${phoneNumber}`;
       if (StartPhoneVerification.ok) {
-        return;
+        toast.success("SMS 발송중..");
+        setTimeout(() => {
+          history.push({
+            pathname: "/verify-phone",
+            state: {
+              phone,
+            },
+          });
+        }, 2000);
       } else {
         toast.error(StartPhoneVerification.error);
       }
     },
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)  => {
     const { name, value } = e.target;
     setInputState({
-      ...InputState,
+      ...inputState,
       [name]: value,
     });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { countryCode, phoneNumber } = InputState;
     const phone = `${countryCode}${phoneNumber}`;
     const isValid = /^\+[1-9]{1}[0-9]{7,11}$/.test(phone);
-
     if (isValid) {
-      history.push({
-        pathname: "/verify-phone",
-        state: {
-          phone
-        }
+      phoneSignIn({
+        variables: { phoneNumber: `${countryCode}${phoneNumber}` },
       });
-      // phoneSignIn({
-      //   variables: { phoneNumber: `${countryCode}${phoneNumber}` },
-      // });
-    }
-    else {
+    } else {
       toast.error("유효한 전화번호를 입력해주세요.");
     }
   };
@@ -115,7 +116,7 @@ function PhoneLogin() {
       <BackArrowExtended backTo={"/"} />
       <Title>Enter your mobile number</Title>
       <CountrySelect
-        value={InputState.countryCode}
+        value={inputState.countryCode}
         name={"countryCode"}
         onChange={handleInputChange}
       >
@@ -128,7 +129,7 @@ function PhoneLogin() {
       <Form onSubmit={handleSubmit}>
         <Input
           placeholder={"053 690 2129"}
-          value={InputState.phoneNumber}
+          value={inputState.phoneNumber}
           onChange={handleInputChange}
           name={"phoneNumber"}
         />

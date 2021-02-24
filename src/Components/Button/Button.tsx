@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "../../typed-components";
 
-const Container = styled.input`
+const Container = styled.button`
   width: 100%;
   background-color: black;
   color: white;
@@ -28,7 +28,7 @@ interface IProps {
 }
 
 const Button: React.FC<IProps> = ({ value, onClick, disabled = false }) => (
-  <Container value={value} disabled={false} onClick={onClick} />
+  <Container value={value} disabled={disabled} onClick={onClick} />
 );
 
 export default Button;

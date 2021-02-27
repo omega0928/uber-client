@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { isLoggedInVar } from "../../apollo";
 import { VERIFY_PHONE } from "../../commonQuery";
 import Button from "../../Components/Button/Button";
 import Header from "../../Components/Header/Header";
@@ -20,6 +21,7 @@ const ExtendedInput = styled(Input)`
 `;
 
 function VerifyPhone() {
+  const isLoggedIn = isLoggedInVar();
   const location: any = useLocation();
   const history = useHistory();
   const [inputState, setInputState] = useState({
@@ -38,6 +40,9 @@ function VerifyPhone() {
       const { CompletePhoneVerification } = data;
       console.log(CompletePhoneVerification)
       if (CompletePhoneVerification.ok) {
+        if (CompletePhoneVerification.token) {
+          localStorage.setItem("jwt", CompletePhoneVerification.token);
+        }
         toast.success("인증되었습니다. 지금 로그인합니다.");
       } else {
         toast.error(CompletePhoneVerification.error);

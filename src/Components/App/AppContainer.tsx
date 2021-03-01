@@ -7,7 +7,8 @@ import { ThemeProvider } from "../../typed-components";
 import AppPresenter from "./AppPresenter";
 
 function AppContainer() {
-  const isLoggedIn = isLoggedInVar();
+  const isLoggedIn = isLoggedInVar(Boolean(localStorage.getItem("jwt")));
+  console.log('AppisLoggedIn', isLoggedIn)
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>

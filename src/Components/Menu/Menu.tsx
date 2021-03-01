@@ -1,14 +1,9 @@
-import { useQuery } from "@apollo/client";
-import { any } from "prop-types";
+import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
 import { Link } from "react-router-dom";
-import { USER_PROFILE } from "../../commonQuery";
+import { TOGGLE_DRIVING, USER_PROFILE } from "../../commonQuery";
 import styled from "../../typed-components";
-import {
-  userProfile,
-  userProfile_GetMyProfile,
-  userProfile_GetMyProfile_user,
-} from "../../__generated-types__";
+import { userProfile } from "../../__generated-types__";
 
 const Container = styled.div`
   height: 100%;
@@ -88,37 +83,37 @@ function MenuPresenter() {
     loading,
   } = useQuery<userProfile>(USER_PROFILE);
 
+  const [drivingControl] = useMutation(TOGGLE_DRIVING, {
+    refetchQueries: [{ query: USER_PROFILE }]
+  })
+
   return (
     <Container>
-      {!loading &&
-        user &&
-        user.fullName && (
-          <React.Fragment>
-            <Header>
-              <Grid>
-                <Link to={"/edit-account"}>
-                  <Image
-                    src={
-                      user.profilePhoto ||
-                      "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
-                    }
-                  />
-                </Link>
-                <Text>
-                  <Name>{user.fullName}</Name>
-                  <Rating>4.5</Rating>
-                </Text>
-              </Grid>
-            </Header>
-            <SLink to="/trips">Your Trips</SLink>
-            <SLink to="/settings">Settings</SLink>
-            <ToggleDriving isDriving={user.isDriving}>
-              {user.isDriving
-                ? "Stop driving"
-                : "Start driving"}
-            </ToggleDriving>
-          </React.Fragment>
-        )}
+      {!loading && user && user.fullName && (
+        <React.Fragment>
+          <Header>
+            <Grid>
+              <Link to={"/edit-account"}>
+                <Image
+                  src={
+                    user.profilePhoto ||
+                    "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
+                  }
+                />
+              </Link>
+              <Text>
+                <Name>{user.fullName}</Name>
+                <Rating>4.5</Rating>
+              </Text>
+            </Grid>
+          </Header>
+          <SLink to="/trips">Your Trips</SLink>
+          <SLink to="/settings">Settings</SLink>
+          <ToggleDriving onClick={drivingControl} isDriving={user.isDriving}>
+            {user.isDriving ? "Stop driving" : "Start driving"}
+          </ToggleDriving>
+        </React.Fragment>
+      )}
     </Container>
   );
 }

@@ -38,7 +38,9 @@ const BackArrowExtended = styled(BackArrow)`
 `;
 
 function SocialLogin() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar)
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  console.log('isLoggedIn', isLoggedIn)
+  // useReactiveVar(isLoggedInVar)
   const [socialState, setSocialState] = useState({
     email: "",
     fbId: "",
@@ -58,7 +60,7 @@ function SocialLogin() {
       } else {
         toast.error(FacebookConnect.error);
       }
-      isLoggedInVar(true)
+      isLoggedInVar(Boolean(localStorage.getItem("jwt")))
     },
   });
 

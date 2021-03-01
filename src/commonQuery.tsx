@@ -46,8 +46,54 @@ export const USER_PROFILE = gql`
       error
       user {
         profilePhoto
+        firstName
+        lastName
+        email
         fullName
         isDriving
+      }
+    }
+  }
+`;
+
+export const TOGGLE_DRIVING = gql`
+  mutation toggleDriving {
+    ToggleDrivingMode {
+      ok
+      error
+    }
+  }
+`;
+
+export const UPDATE_PROFILE = gql`
+  mutation updateProfile(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $profilePhoto: String!
+  ) {
+    UpdateMyProfile(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      profilePhoto: $profilePhoto
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
+export const GET_PLACES = gql`
+  query getPlaces {
+    GetMyPlaces {
+      ok
+      error
+      places {
+        id
+        name
+        address
+        isFav
       }
     }
   }

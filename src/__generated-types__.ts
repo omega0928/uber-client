@@ -85,6 +85,9 @@ export interface facebookConnectVariables {
 export interface userProfile_GetMyProfile_user {
   __typename: "User";
   profilePhoto: string | null;
+  firstName: string;
+  lastName: string;
+  email: string | null;
   fullName: string | null;
   isDriving: boolean;
 }
@@ -98,6 +101,79 @@ export interface userProfile_GetMyProfile {
 
 export interface userProfile {
   GetMyProfile: userProfile_GetMyProfile;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: toggleDriving
+// ====================================================
+
+export interface toggleDriving_ToggleDrivingMode {
+  __typename: "ToggleDrivingModeResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface toggleDriving {
+  ToggleDrivingMode: toggleDriving_ToggleDrivingMode;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: updateProfile
+// ====================================================
+
+export interface updateProfile_UpdateMyProfile {
+  __typename: "UpdateMyProfileResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface updateProfile {
+  UpdateMyProfile: updateProfile_UpdateMyProfile;
+}
+
+export interface updateProfileVariables {
+  firstName: string;
+  lastName: string;
+  email: string;
+  profilePhoto: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getPlaces
+// ====================================================
+
+export interface getPlaces_GetMyPlaces_places {
+  __typename: "Place";
+  id: number;
+  name: string;
+  address: string;
+  isFav: boolean;
+}
+
+export interface getPlaces_GetMyPlaces {
+  __typename: "GetMyPlacesResponse";
+  ok: boolean;
+  error: string | null;
+  places: (getPlaces_GetMyPlaces_places | null)[] | null;
+}
+
+export interface getPlaces {
+  GetMyPlaces: getPlaces_GetMyPlaces;
 }
 
 /* tslint:disable */

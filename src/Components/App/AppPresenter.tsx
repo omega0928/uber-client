@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import AddPlace from "../../Routes/AddPlace";
-import EditAccount from "../../Routes/EditAccount";
+import AddPlace from "../../Routes/AddPlace/AddPlace";
+import EditAccount from "../../Routes/EditAccount/EditAccount";
 import FindAddress from "../../Routes/FindAddress"
 import Home from "../../Routes/Home/Home";
 import Login from "../../Routes/Login";
 import PhoneLogin from "../../Routes/PhoneLogin/PhoneLogin";
-import Places from "../../Routes/Places";
+import Places from "../../Routes/Places/Places";
 import Ride from "../../Routes/Ride";
-import Settings from "../../Routes/Settings";
+import Settings from "../../Routes/Settings/Settings";
 import SocialLogin from "../../Routes/SocialLogin/SocialLogin";
 import VerifyPhone from "../../Routes/VerifyPhone/VerifyPhone";
 

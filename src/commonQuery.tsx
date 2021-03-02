@@ -98,3 +98,33 @@ export const GET_PLACES = gql`
     }
   }
 `;
+
+export const ADD_PLACE = gql`
+  mutation addPlace(
+    $name: String!
+    $lat: Float!
+    $lng: Float!
+    $address: String!
+    $isFav: Boolean!
+  ) {
+    AddPlace(
+      name: $name
+      lat: $lat
+      lng: $lng
+      address: $address
+      isFav: $isFav
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
+export const EDIT_PLACE = gql`
+  mutation editPlace($placeId: Int!, $isFav: Boolean) {
+    EditPlace(placeId: $placeId, isFav: $isFav) {
+      ok
+      error
+    }
+  }
+`;

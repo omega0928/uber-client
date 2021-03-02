@@ -4,6 +4,11 @@ import Button from "../../Components/Button/Button";
 import Header from "../../Components/Header/Header";
 import Input from "../../Components/Input/Input";
 import styled from "../../typed-components";
+import { useHistory } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_PLACE, GET_PLACES } from "../../commonQuery";
+import { addPlace, addPlaceVariables } from "../../__generated-types__";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   padding: 0 40px;
@@ -20,25 +25,52 @@ const ExtendedLink = styled(Link)`
 `;
 
 function AddPlace() {
+  const history = useHistory();
   const [inputState, setInputState] = useState({
     address: "",
     name: "",
-  })
-  const { address, name } = inputState
+    lat: 0,
+    lng: 0,
+  });
+  const { address, name, lat, lng } = inputState;
+  const [placeAdd, { loading }] = useMutation<addPlace, addPlaceVariables>(
+    ADD_PLACE,
+    {
+      onCompleted: (data) => {
+        const { AddPlace } = data;
+        if (AddPlace.ok) {
+          toast.success("장소 추가됨");
+          setTimeout(() => {
+            history.push("/places");
+          }, 1000);
+        } else {
+          toast.error(AddPlace.error);
+        }
+      },
+      refetchQueries: [{ query: GET_PLACES }],
+    }
+  );
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setInputState({
       ...inputState,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-
-  }
-
-
+    e.preventDefault();
+    placeAdd({
+      variables: {
+        address: address,
+        name: name,
+        lat: lat,
+        lng: lng,
+        isFav: false,
+      },
+    });
+  };
 
   return (
     <React.Fragment>
@@ -60,10 +92,12 @@ function AddPlace() {
             name={"address"}
           />
           <ExtendedLink to={"/find-address"}>Pick place from map</ExtendedLink>
-          <Button
-            onClick={null}
-            value={ "Adding place"  }
-          />
+          {lat !== 0 && lng !== 0 && (
+            <Button
+              onClick={null}
+              value={loading ? "Adding place" : "Add Place"}
+            />
+          )}
         </form>
       </Container>
     </React.Fragment>

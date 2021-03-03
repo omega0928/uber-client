@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AddPlace from "../../Routes/AddPlace/AddPlace";
 import EditAccount from "../../Routes/EditAccount/EditAccount";
-import FindAddress from "../../Routes/FindAddress"
+import FindAddress from "../../Routes/FindAddress/FindAddress"
 import Home from "../../Routes/Home/Home";
 import Login from "../../Routes/Login";
 import PhoneLogin from "../../Routes/PhoneLogin/PhoneLogin";

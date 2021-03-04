@@ -26,11 +26,16 @@ const ExtendedLink = styled(Link)`
 
 function AddPlace() {
   const history = useHistory();
+  console.log("history", history);
+  const { location: { state = {} } = {} } = history;
+  const findAddress:any = history?.location?.state
+  const findLat:any = history?.location?.state
+  const findLng:any = history?.location?.state
   const [inputState, setInputState] = useState({
-    address: "",
+    address: findAddress?.address||"",
     name: "",
-    lat: 0,
-    lng: 0,
+    lat: findLat?.lat || 0,
+    lng: findLng?.lng || 0,
   });
   const { address, name, lat, lng } = inputState;
   const [placeAdd, { loading }] = useMutation<addPlace, addPlaceVariables>(

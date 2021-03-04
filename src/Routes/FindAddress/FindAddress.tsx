@@ -34,7 +34,7 @@ const ExtendedButton = styled(Button)`
 
 function FindAddress() {
   const history = useHistory();
-  const [location, SetLocation] = useState({
+  const [location, setLocation] = useState({
     lat: 0,
     lng: 0,
     address: "",
@@ -56,7 +56,7 @@ function FindAddress() {
     const lat = newCenter.lat();
     const lng = newCenter.lng();
 
-    SetLocation({
+    setLocation({
       ...location,
       lat: lat,
       lng: lng,
@@ -64,11 +64,11 @@ function FindAddress() {
   };
   map?.addListener("dragend", handleDragEnd);
 
-  const handleGeoSuccess = (position: any) => {
+  const handleGeoSuccess: PositionCallback = (position: any) => {
     const {
       coords: { latitude, longitude },
     } = position;
-    SetLocation({
+    setLocation({
       ...location,
       lat: latitude,
       lng: longitude,
@@ -76,7 +76,7 @@ function FindAddress() {
     reverseGeocodeAddress(latitude, longitude);
   };
 
-  const handleGeoError = () => {
+  const handleGeoError: PositionErrorCallback = () => {
     return;
   };
 
@@ -84,7 +84,7 @@ function FindAddress() {
     const {
       target: { name, value },
     } = e;
-    SetLocation({
+    setLocation({
       ...location,
       [name]: value,
     });
@@ -93,7 +93,7 @@ function FindAddress() {
   const reverseGeocodeAddress = async (lat: number, lng: number) => {
     const reversAddress = await reverseGeoCode(lat, lng);
     if (reversAddress !== false) {
-      SetLocation({
+      setLocation({
         ...location,
         address: reversAddress,
       });
@@ -104,7 +104,7 @@ function FindAddress() {
     const result = await geoCode(address);
     if (result !== false) {
       const { lat, lng, formatted_address: formattedAddress } = result;
-      SetLocation({
+      setLocation({
         address: formattedAddress,
         lat,
         lng,

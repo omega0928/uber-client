@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { Link } from "react-router-dom";
 import { GET_PLACES, USER_PROFILE } from "../../commonQuery";
-import Header from "../../Components/Header/Header";
-import Place from "../../Components/Place/Place";
+import Header from "../../Common/Header/Header";
+import Place from "../../Common/Place/Place";
 import styled from "../../typed-components";
 import { getPlaces, userProfile } from "../../__generated-types__";
 

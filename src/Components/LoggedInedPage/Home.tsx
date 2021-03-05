@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "react-sidebar";
 import styled from "../../typed-components";
-import Menu from "../../Components/Menu/Menu";
+import Menu from "../../Common/Menu/Menu";
 import { useQuery } from "@apollo/client";
 import { USER_PROFILE } from "../../commonQuery";
 import { useGoogleMaps } from "react-hook-google-maps";
 import { MAPS_KEY } from "../../keys";
-import Button from "../../Components/Button/Button";
-import AddressBar from "../../Components/AddressBar/AddressBar";
+import Button from "../../Common/Button/Button";
+import AddressBar from "../../Common/AddressBar/AddressBar";
 import { geoCode } from "../../mapHelpers";
 import { toast } from "react-toastify";
 

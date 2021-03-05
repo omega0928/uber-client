@@ -4,9 +4,9 @@ import { useLocation, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { isLoggedInVar } from "../../apollo";
 import { VERIFY_PHONE } from "../../commonQuery";
-import Button from "../../Components/Button/Button";
-import Header from "../../Components/Header/Header";
-import Input from "../../Components/Input/Input";
+import Button from "../../Common/Button/Button";
+import Header from "../../Common/Header/Header";
+import Input from "../../Common/Input/Input";
 import styled from "../../typed-components";
 import { verifyphone, verifyphoneVariables } from "../../__generated-types__";
 

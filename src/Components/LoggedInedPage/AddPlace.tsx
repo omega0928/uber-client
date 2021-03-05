@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../Components/Button/Button";
-import Header from "../../Components/Header/Header";
-import Input from "../../Components/Input/Input";
+import Button from "../../Common/Button/Button";
+import Header from "../../Common/Header/Header";
+import Input from "../../Common/Input/Input";
 import styled from "../../typed-components";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";

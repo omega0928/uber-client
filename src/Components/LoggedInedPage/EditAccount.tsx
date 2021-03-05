@@ -2,9 +2,9 @@ import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { UPDATE_PROFILE, USER_PROFILE } from "../../commonQuery";
-import Button from "../../Components/Button/Button";
-import Header from "../../Components/Header/Header";
-import Input from "../../Components/Input/Input";
+import Button from "../../Common/Button/Button";
+import Header from "../../Common/Header/Header";
+import Input from "../../Common/Input/Input";
 import styled from "../../typed-components";
 import {
   updateProfile,

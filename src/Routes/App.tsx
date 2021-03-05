@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import AddPlace from "../../Routes/AddPlace/AddPlace";
-import EditAccount from "../../Routes/EditAccount/EditAccount";
-import FindAddress from "../../Routes/FindAddress/FindAddress"
-import Home from "../../Routes/Home/Home";
-import Login from "../../Routes/Login";
-import PhoneLogin from "../../Routes/PhoneLogin/PhoneLogin";
-import Places from "../../Routes/Places/Places";
-import Ride from "../../Routes/Ride";
-import Settings from "../../Routes/Settings/Settings";
-import SocialLogin from "../../Routes/SocialLogin/SocialLogin";
-import VerifyPhone from "../../Routes/VerifyPhone/VerifyPhone";
+import AddPlace from "../Components/LoggedInedPage/AddPlace";
+import EditAccount from "../Components/LoggedInedPage/EditAccount";
+import FindAddress from "../Components/LoggedInedPage/FindAddress"
+import Home from "../Components/LoggedInedPage/Home";
+import Login from "../Components/LoggedOutPage/Login";
+import PhoneLogin from "../Components/LoggedOutPage/PhoneLogin";
+import Places from "../Components/LoggedInedPage/Places";
+import Ride from "../Components/LoggedInedPage/Ride";
+import Settings from "../Components/LoggedInedPage/Settings";
+import SocialLogin from "../Components/LoggedOutPage/SocialLogin";
+import VerifyPhone from "../Components/LoggedOutPage/VerifyPhone";
 
 interface IProps {
   isLoggedIn: boolean;

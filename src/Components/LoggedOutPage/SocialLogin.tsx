@@ -4,7 +4,7 @@ import FacebookLogin from "react-facebook-login";
 import { toast } from "react-toastify";
 import { isLoggedInVar } from "../../apollo";
 import { FACEBOOK_CONNECT } from "../../commonQuery";
-import BackArrow from "../../Components/BackArrow/BackArrow";
+import BackArrow from "../../Common/BackArrow/BackArrow";
 import styled from "../../typed-components";
 import {
   facebookConnect,

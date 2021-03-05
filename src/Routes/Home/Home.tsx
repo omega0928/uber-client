@@ -9,6 +9,7 @@ import { MAPS_KEY } from "../../keys";
 import Button from "../../Components/Button/Button";
 import AddressBar from "../../Components/AddressBar/AddressBar";
 import { geoCode } from "../../mapHelpers";
+import { toast } from "react-toastify";
 
 const Container = styled.div``;
 
@@ -46,9 +47,11 @@ function Home() {
     lng: 0,
     toAddress: "",
     toLat: 0,
-    toLng: 0
+    toLng: 0,
+    distance: "",
+    duration: "",
   });
-  console.log('location',location)
+  console.log("location", location);
   const { lat, lng, toAddress } = location;
   const { loading } = useQuery(USER_PROFILE);
   const { ref, map, google } = useGoogleMaps(
@@ -112,71 +115,86 @@ function Home() {
     const { name, value } = e.target;
     setLocation({
       ...location,
-      [name]: value
-    })
-  }
-  
+      [name]: value,
+    });
+  };
 
   const handleAddressSubmit = async () => {
     const result = await geoCode(toAddress);
     if (result !== false) {
       const { lat, lng, formatted_address: formatedAddress } = result;
-      console.log('Submitlat', lat)
-      console.log('Submitlng', lng)
+      console.log("Submitlat", lat);
+      console.log("Submitlng", lng);
       if (toMarker) {
-        toMarker.setMap(null)
+        toMarker.setMap(null);
       }
       const toMarkerOptions = {
         position: {
           lat,
-          lng
-        }
-      }
-      var toMarker = new google.maps.Marker(toMarkerOptions)
-      toMarker.setMap(map)
+          lng,
+        },
+      };
+      var toMarker = new google.maps.Marker(toMarkerOptions);
+      toMarker.setMap(map);
       const bounds = new google.maps.LatLngBounds();
-      bounds.extend({lat, lng})
-      bounds.extend({lat:location.lat, lng:location.lng})
-      map.fitBounds(bounds)
+      bounds.extend({ lat, lng });
+      bounds.extend({ lat: location.lat, lng: location.lng });
+      map.fitBounds(bounds);
       await setLocation({
         ...location,
         toAddress: formatedAddress,
         toLat: lat,
-        toLng: lng
-      })
-      createPath()
+        toLng: lng,
+      });
+      createPath();
     }
-  }
+  };
 
   const createPath = () => {
-    const { toLat, toLng } = location
-    console.log('toLat', toLat)
-    if(directions) {
-      directions.setMap(null)
+    const { toLat, toLng } = location;
+    console.log("toLat", toLat);
+    if (directions) {
+      directions.setMap(null);
     }
     const renderOptions = {
       polylineOptions: {
-        strokeColor: "#000"
+        strokeColor: "#000",
       },
-      suppressMarkers: true
+      suppressMarkers: true,
     };
     if (map) {
-      var directions = new google.maps.DirectionsRenderer(renderOptions)
+      var directions = new google.maps.DirectionsRenderer(renderOptions);
       const directionService = new google.maps.DirectionsService();
       const to = new google.maps.LatLng(35.689487, 139.691711);
       const from = new google.maps.LatLng(35.6938253, 139.7033559);
-      console.log('abctoLng',to)
-      console.log('abclng',from)
+      console.log("abctoLng", to);
+      console.log("abclng", from);
       const directionOptions = {
         destination: to,
         origin: from,
-        travelMode: google.maps.TravelMode.DRIVING
-      }
+        travelMode: google.maps.TravelMode.DRIVING,
+      };
       directionService.route(directionOptions, (result: any, status: any) => {
-        console.log(result, status)
-      })
+        if (status === "OK") {
+          const { routes } = result;
+          const {
+            distance: { text: distance },
+            duration: { text: duration },
+          } = routes[0].legs[0];
+          setLocation({
+            ...location,
+            distance,
+            duration,
+          });
+          console.log(distance, duration);
+          directions.setDirections(result);
+          directions.setMap(map);
+        } else {
+          toast.error("경로가 없습니다");
+        }
+      });
     }
-  }
+  };
 
   navigator.geolocation.watchPosition(
     handleGeoWatchSuccess,

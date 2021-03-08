@@ -9,8 +9,8 @@ React(Hook), Typescript, graphql - Apollo Client (React)
 
 ## Migration
 
-React class component -> hook component
-Apollo Client 2.x -> 3.x
+- React class component -> hook component
+- Apollo Client 2.x -> 3.x
 
 ## File
 

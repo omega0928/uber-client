@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import AddPlace from "../Components/LoggedInedPage/AddPlace";
-import EditAccount from "../Components/LoggedInedPage/EditAccount";
-import FindAddress from "../Components/LoggedInedPage/FindAddress"
-import Home from "../Components/LoggedInedPage/Home";
+import AddPlace from "../Components/LoggedInPage/AddPlace";
+import EditAccount from "../Components/LoggedInPage/EditAccount";
+import FindAddress from "../Components/LoggedInPage/FindAddress"
+import Home from "../Components/LoggedInPage/Home";
 import Login from "../Components/LoggedOutPage/Login";
 import PhoneLogin from "../Components/LoggedOutPage/PhoneLogin";
-import Places from "../Components/LoggedInedPage/Places";
-import Ride from "../Components/LoggedInedPage/Ride";
-import Settings from "../Components/LoggedInedPage/Settings";
+import Places from "../Components/LoggedInPage/Places";
+import Ride from "../Components/LoggedInPage/Ride";
+import Settings from "../Components/LoggedInPage/Settings";
 import SocialLogin from "../Components/LoggedOutPage/SocialLogin";
 import VerifyPhone from "../Components/LoggedOutPage/VerifyPhone";
 
